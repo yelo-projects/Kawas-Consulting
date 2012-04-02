@@ -1,0 +1,40 @@
+@import "reset";
+@import "variables"
+@import "mixins"
+
+body,html{
+	width:100%;
+	padding:0;
+	margin:0;
+}
+
+body{
+	background-color:#CCC;
+}
+
+#MainWrapper{
+	width:100%;
+	min-height:100%;
+	margin:0 auto;
+}
+
+#Pages{
+	margin:0 auto;
+	min-height:100%;
+	width:100%;
+	position:relative;
+	&:after{
+		content: ".";
+		display: block;
+		clear: both;
+		visibility: hidden;
+		line-height: 0;
+		height: 0;
+	}
+}
+
+html[xmlns] .clearfix {display: block;}
+* html .clearfix {height: 1%;}
+
+@import "pages";
+@import "typography";

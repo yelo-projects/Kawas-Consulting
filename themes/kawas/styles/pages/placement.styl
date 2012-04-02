@@ -1,0 +1,84 @@
+.pages-wrapper{
+	width:100%;
+	position:relative;	
+	background-color:RGB(150,55,109);
+	background-image:url('../images/clouds.png');
+	overflow:hidden;
+	&:nth-child(8n+1){
+		background-color:RGB(150,55,109);
+	}
+	&:nth-child(2n+1){
+		background-color:RGB(0,112,153);
+		.top{
+			color:rgb(130,0,83);
+		}
+	}
+	&:nth-child(3n+1){
+		background-color:RGB(0,136,86);
+	}
+	&:nth-child(4n+1){
+		background-color:RGB(45,65,98);
+	}
+	&:nth-child(5n+1){
+		background-color:RGB(102,71,87);
+	}
+	&:nth-child(6n+1){
+		background-color:RGB(0,112,153);
+	}
+	&:nth-child(7n+1){
+		background-color:RGB(0,112,153);
+	}
+}
+
+.pages-slider{
+	width:$wrapperWidth;
+	min-height:$wrapperHeight;
+	position:relative;
+	margin:0 auto;
+	padding:$pageMarginY 0 $pageMarginY 0;
+}
+
+
+pagePos($pos){
+	top: $pageMarginY;
+	left: $pageSpaceX * $pos;
+}
+
+.page{
+	width:$pageWidth;
+	height:$pageHeight;
+	box-shadow(1px,1px,10px,5px,rgba(0,0,0,0.3));
+	background-color:$pageBg;
+	float:left;
+	display:block;
+	padding:$pagePadding;
+	position:absolute;
+	&.pos-2{
+		pagePos(1);
+	}
+	&.pos-3{
+		pagePos(2);
+	}
+	&.pos-4{
+		pagePos(3);
+	}
+	&.pos-5{
+		pagePos(4);
+	}
+	&.pos-6{
+		pagePos(5);
+	}
+	&.pos-7{
+		pagePos(6);
+	}
+	&.pos-8{
+		pagePos(7);
+	}
+	&.pos-9{
+		pagePos(8);
+	}
+	&.pos-10{
+		pagePos(9);
+	}
+}
+

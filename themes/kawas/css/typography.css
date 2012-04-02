@@ -1,0 +1,24 @@
+body {
+  font-family: 'Molengo', 'Helvetica', verdana, sans;
+}
+h1 {
+  font-size: 130%;
+  margin-top: 30px;
+}
+h2 {
+  font-size: 110%;
+}
+h3 {
+  font-size: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #999;
+}
+p {
+  padding: 0 15px 0 15px;
+  margin-top: 0;
+}

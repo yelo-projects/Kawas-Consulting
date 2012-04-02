@@ -1,0 +1,81 @@
+.breadcrumbs{
+	height:20px;
+	float:right;
+	a{
+		display:block;
+		width:20px;
+		height:20px;
+		background:#999;
+		color:#FFF;
+		text-decoration:none;
+		text-align:center;
+		font-size:10px;
+		line-height:20px;
+		float:left;
+		margin-right:10px;
+		&.home{
+			width:40px;
+		}
+		&.current{
+			background:#990066;
+		}
+	}
+}
+
+.controls{
+	width:$wrapperWidth + ($pageMarginX * 2) + ($controlsSize);
+	position:relative;
+	margin:0 auto;
+	top:- ($wrapperHeight / 2) - ($pageMarginY/2) - $controlsSize;
+	a{
+		width:$controlsSize;
+		height:$controlsSize;
+		display:block;
+		background:black;
+		position:absolute;
+		width 50px
+		height 50px
+		background:green;
+		text-decoration:none;
+		font-size 50px
+		color:#BBB;
+		background:#FCFCFC;
+		text-align:center;
+		line-height:35px;
+		&.next{right:0;}
+		&.previous{left:0;}
+		&:hover{
+			background-color:#FDFDFD;
+			color:black;
+		}
+	}
+}
+
+
+.field,.Actions{
+	margin-top:10px;
+	width:60%;
+	margin:10px 5% 0 5%;
+}
+fieldset{
+	border:0 none;
+	padding:0;
+	margin:0;
+	label{
+		margin-bottom:5px;
+		em{
+			color:#990000;
+		}
+	}
+	input, textarea{
+		width:100%;
+	}
+	textarea{
+		height:160x;
+	}
+	.message{
+		color:#999;
+		font-size:90%;
+		font-style:italic;
+	}
+}
