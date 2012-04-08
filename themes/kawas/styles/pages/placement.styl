@@ -1,32 +1,31 @@
+pageWrapperPos($pos)
+	&.pos-{$pos}
+		position:absolute
+		top:($wrapperHeight + ($pageMarginY * 2)) * ($pos - 1);
+		left: 0
+
 .pages-wrapper{
-	width:100%;
 	position:relative;	
 	background-color:RGB(150,55,109);
 	background-image:url('../images/clouds.png');
 	overflow:hidden;
-	&:nth-child(8n+1){
-		background-color:RGB(150,55,109);
+	width:100%;
+	height:$wrapperHeight + ($pageMarginY * 2);
+	top:0;
+	left:0;
+	border-bottom:3px solid red;
+	.bg{
+		margin: 0 auto;
+		padding: 0;
+		position: absolute;
+		width: 100%;
+		height:100%;
 	}
-	&:nth-child(2n+1){
-		background-color:RGB(0,112,153);
-		.top{
-			color:rgb(130,0,83);
-		}
+	for num in 1 2 3 4 5 6 7 8 9 10 11 12 13{
+		pageWrapperPos(num);
 	}
-	&:nth-child(3n+1){
-		background-color:RGB(0,136,86);
-	}
-	&:nth-child(4n+1){
-		background-color:RGB(45,65,98);
-	}
-	&:nth-child(5n+1){
-		background-color:RGB(102,71,87);
-	}
-	&:nth-child(6n+1){
-		background-color:RGB(0,112,153);
-	}
-	&:nth-child(7n+1){
-		background-color:RGB(0,112,153);
+	&.fixed{
+		position:fixed;
 	}
 }
 

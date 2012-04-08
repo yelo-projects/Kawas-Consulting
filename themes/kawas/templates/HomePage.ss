@@ -21,7 +21,8 @@
 <body>
 <div id="MainWrapper">
 	<div id="Pages">
-		<div class="pages-wrapper home">
+		<div class="pages-wrapper home pos-1">
+			<div class="bg"></div>
 			<div class="pages-slider">
 			<div class="page pos-1">
 			<div id="home" class="home">
@@ -30,8 +31,9 @@
 					<ul>
 					<% control Menu(1) %>
 					<% if URLSegment == home %>
+					<% else_if URLSegment == blog %>
 					<% else %>
-					<li><a href="#$UniqueId" title="Go to the $Title.XML page" class="$LinkingMode $UniqueID">
+					<li><a href="#$UniqueId" title="Go to the $Title.XML page" class="$LinkingMode page-link $UniqueID">
 						<span class="dots"></span>
 						<span class="menuItemName">$MenuTitle.XML</span>
 						<span class="menuExplanation">

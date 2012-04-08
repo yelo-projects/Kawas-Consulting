@@ -33,7 +33,7 @@ a {
   outline: none;
 }
 a:focus {
-  outline: thin dotted;
+  outline: none;
 }
 a:active {
   outline: none;
@@ -158,35 +158,90 @@ html[xmlns] .clearfix {
   background: #fdfdfd;
 }
 .pages-wrapper {
-  width: 100%;
   position: relative;
   background-color: RGB(150, 55, 109);
   background-image: url("../images/clouds.png");
   overflow: hidden;
+  width: 100%;
+  height: 750px;
+  top: 0;
+  left: 0;
+  border-bottom: 3px solid #f00;
 }
-.pages-wrapper:nth-child(8n+1) {
-  background-color: RGB(150, 55, 109);
+.pages-wrapper .bg {
+  margin: 0 auto;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
-.pages-wrapper:nth-child(2n+1) {
-  background-color: RGB(0, 112, 153);
+.pages-wrapper.pos-1 {
+  position: absolute;
+  top: 0px;
+  left: 0;
 }
-.pages-wrapper:nth-child(2n+1) .top {
-  color: #820053;
+.pages-wrapper.pos-2 {
+  position: absolute;
+  top: 750px;
+  left: 0;
 }
-.pages-wrapper:nth-child(3n+1) {
-  background-color: RGB(0, 136, 86);
+.pages-wrapper.pos-3 {
+  position: absolute;
+  top: 1500px;
+  left: 0;
 }
-.pages-wrapper:nth-child(4n+1) {
-  background-color: RGB(45, 65, 98);
+.pages-wrapper.pos-4 {
+  position: absolute;
+  top: 2250px;
+  left: 0;
 }
-.pages-wrapper:nth-child(5n+1) {
-  background-color: RGB(102, 71, 87);
+.pages-wrapper.pos-5 {
+  position: absolute;
+  top: 3000px;
+  left: 0;
 }
-.pages-wrapper:nth-child(6n+1) {
-  background-color: RGB(0, 112, 153);
+.pages-wrapper.pos-6 {
+  position: absolute;
+  top: 3750px;
+  left: 0;
 }
-.pages-wrapper:nth-child(7n+1) {
-  background-color: RGB(0, 112, 153);
+.pages-wrapper.pos-7 {
+  position: absolute;
+  top: 4500px;
+  left: 0;
+}
+.pages-wrapper.pos-8 {
+  position: absolute;
+  top: 5250px;
+  left: 0;
+}
+.pages-wrapper.pos-9 {
+  position: absolute;
+  top: 6000px;
+  left: 0;
+}
+.pages-wrapper.pos-10 {
+  position: absolute;
+  top: 6750px;
+  left: 0;
+}
+.pages-wrapper.pos-11 {
+  position: absolute;
+  top: 7500px;
+  left: 0;
+}
+.pages-wrapper.pos-12 {
+  position: absolute;
+  top: 8250px;
+  left: 0;
+}
+.pages-wrapper.pos-13 {
+  position: absolute;
+  top: 9000px;
+  left: 0;
+}
+.pages-wrapper.fixed {
+  position: fixed;
 }
 .pages-slider {
   width: 810px;
@@ -327,6 +382,37 @@ fieldset .message {
   font-size: 90%;
   font-style: italic;
 }
+.pages-wrapper.pos-1 {
+  background: url("../images/bg/firstBG.jpg") 50% 0 no-repeat fixed;
+  color: #fff;
+  margin: 0;
+}
+.pages-wrapper.pos-2 {
+  background: url("../images/bg/secondBG.jpg") 50% 0 no-repeat fixed;
+  color: #fff;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0;
+}
+.pages-wrapper.pos-2 .bg {
+  background: url("../images/bg/trainers.png") 50% 0 no-repeat fixed;
+}
+.pages-wrapper.pos-3 {
+  background: url("../images/bg/thirdBG.jpg") 50% 0 no-repeat fixed;
+  color: #fff;
+}
+.pages-wrapper.pos-4 {
+  background: url("../images/bg/bubbles2.png"), url("../images/bg/bubbles2.png"), url("../images/bg/bubbles1.png"), url("../images/bg/fourthBG.jpg");
+  background-position: 50% 0, 50% 0, 50% 0, 50% 0;
+  background-color: #036;
+  background-attachment: fixed;
+  background-repeat: repeat, repeat, repeat, no-repeat;
+  color: #fff;
+}
+.pages-wrapper.pos-5 {
+  background: #ccc;
+  margin: 0 auto;
+}
 .home .pages-slider {
   padding-top: 40px;
 }
@@ -362,7 +448,6 @@ fieldset .message {
 .home .body a .menuItemName {
   background: #fdfdfd;
   display: inline-block;
-  z-index: 200;
   width: auto;
   padding-right: 10px;
   position: relative;

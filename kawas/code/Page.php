@@ -133,14 +133,25 @@ class Page_Controller extends ContentController {
 
 	public function init() {
 		$jqueryVer = '1.7.2';
+		$root = 'kawas/javascript/';
 		if(Director::isDev()){
-			Requirements::javascript('kawas/javascript/jquery-'.$jqueryVer.'.js');
-			Requirements::javascript('kawas/javascript/main.js');
+			Requirements::javascript($root.'jquery-'.$jqueryVer.'.js');
 		}else{
 			Requirements::javascript('http://ajax.googleapis.com/ajax/libs/jquery/'+$jqueryVer+'/jquery.min.js');
-			Requirements::customScript("if(typeof jQuery === 'undefined'){document.write(unescape(\"%3Cscript src='/site/javascript/jquery-"+$jqueryVer+".min.js' type='text/javascript' %3E%3C/script%3E\"))}");
-			Requirements::javascript('kawas/javascript/js.js');
+			Requirements::customScript("if(typeof jQuery === 'undefined'){document.write(unescape(\"%3Cscript src='".$root."jquery-".$jqueryVer.".min.js' type='text/javascript' %3E%3C/script%3E\"))}");
 		}
+		Requirements::combine_files('kawas.js',array(
+			  $root.'jquery.scrollTo-1.4.2-min.js'	
+			, $root.'jquery.localscroll-1.2.7-min.js'
+			, $root.'jquery.inview.js'
+			, $root.'jquery.easing.1.3.js'
+			, $root.'mailHider.js'
+			, $root.'slider.js'
+			//$root.'parallax.js',
+			, $root.'jquery.lettering-0.6.1.min.js'
+			, $root.'jquery.scrollorama.js'
+			, $root.'main.js'
+    	));
 		parent::init();
 	}
 
