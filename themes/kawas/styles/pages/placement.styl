@@ -5,9 +5,7 @@ pageWrapperPos($pos)
 		left: 0
 
 .pages-wrapper{
-	position:relative;	
-	background-color:RGB(150,55,109);
-	background-image:url('../images/clouds.png');
+	position:relative;
 	overflow:hidden;
 	width:100%;
 	height:$wrapperHeight + ($pageMarginY * 2);
@@ -20,12 +18,25 @@ pageWrapperPos($pos)
 		position: absolute;
 		width: 100%;
 		height:100%;
+		background-attachment:fixed;
+	}
+	.bg-1{
+		background-repeat:no-repeat;
+		background-position:top right;
+		background-size:contain;
+	}
+	.bg-2{
+		background-repeat:repeat-x;
+		background-position:bottom center;
 	}
 	for num in 1 2 3 4 5 6 7 8 9 10 11 12 13{
 		pageWrapperPos(num);
 	}
 	&.fixed{
 		position:fixed;
+	}
+	&.footer{
+		height:30px;
 	}
 }
 

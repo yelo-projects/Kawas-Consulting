@@ -22,7 +22,8 @@
 <div id="MainWrapper">
 	<div id="Pages">
 		<div class="pages-wrapper home pos-1">
-			<div class="bg"></div>
+			<div class="bg-1 bg"></div>
+			<div class="bg-2 bg"></div>
 			<div class="pages-slider">
 			<div class="page pos-1">
 			<div id="home" class="home">
@@ -51,6 +52,8 @@
 			</div>
 		</div>		
 		$Layout
+		<div class="pages-wrapper footer">
+		</div>
 	</div>
 </div>
 </body>

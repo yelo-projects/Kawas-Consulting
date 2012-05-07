@@ -109,7 +109,11 @@ html {
   margin: 0;
 }
 body {
-  background-color: #ccc;
+  background-color: #b9d5e1;
+  background-image: url("../backgrounds/clouds.png");
+  background-repeat: repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 #MainWrapper {
   width: 100%;
@@ -159,8 +163,6 @@ html[xmlns] .clearfix {
 }
 .pages-wrapper {
   position: relative;
-  background-color: RGB(150, 55, 109);
-  background-image: url("../images/clouds.png");
   overflow: hidden;
   width: 100%;
   height: 750px;
@@ -174,6 +176,16 @@ html[xmlns] .clearfix {
   position: absolute;
   width: 100%;
   height: 100%;
+  background-attachment: fixed;
+}
+.pages-wrapper .bg-1 {
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: contain;
+}
+.pages-wrapper .bg-2 {
+  background-repeat: repeat-x;
+  background-position: bottom center;
 }
 .pages-wrapper.pos-1 {
   position: absolute;
@@ -242,6 +254,9 @@ html[xmlns] .clearfix {
 }
 .pages-wrapper.fixed {
   position: fixed;
+}
+.pages-wrapper.footer {
+  height: 30px;
 }
 .pages-slider {
   width: 810px;
@@ -382,34 +397,29 @@ fieldset .message {
   font-size: 90%;
   font-style: italic;
 }
-.pages-wrapper.pos-1 {
-  background: url("../images/bg/firstBG.jpg") 50% 0 no-repeat fixed;
-  color: #fff;
-  margin: 0;
+.pages-wrapper.pos-1 .bg-1 {
+  background-image: url("../backgrounds/kc.006.png");
 }
-.pages-wrapper.pos-2 {
-  background: url("../images/bg/secondBG.jpg") 50% 0 no-repeat fixed;
-  color: #fff;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 0;
+.pages-wrapper.pos-1 .bg-2 {
+  background-image: url("../backgrounds/kc.004.png");
 }
-.pages-wrapper.pos-2 .bg {
-  background: url("../images/bg/trainers.png") 50% 0 no-repeat fixed;
+.pages-wrapper.pos-2 .bg-1 {
+  background-image: url("../backgrounds/kc.006.png");
 }
-.pages-wrapper.pos-3 {
+.pages-wrapper.pos-2 .bg-2 {
+  background-image: url("../backgrounds/kc.004.png");
+}
+.pages-wrapper.pos-3 .bg-1 {
   background: url("../images/bg/thirdBG.jpg") 50% 0 no-repeat fixed;
-  color: #fff;
 }
-.pages-wrapper.pos-4 {
-  background: url("../images/bg/bubbles2.png"), url("../images/bg/bubbles2.png"), url("../images/bg/bubbles1.png"), url("../images/bg/fourthBG.jpg");
-  background-position: 50% 0, 50% 0, 50% 0, 50% 0;
+.pages-wrapper.pos-4 .bg-1 {
+  background: url("../images/bg/bubbles1.png"), url("../images/bg/bubbles1.png");
+  background-position: 50% 0, 50% 0;
   background-color: #036;
   background-attachment: fixed;
   background-repeat: repeat, repeat, repeat, no-repeat;
-  color: #fff;
 }
-.pages-wrapper.pos-5 {
+.pages-wrapper.pos-5 .bg-1 {
   background: #ccc;
   margin: 0 auto;
 }

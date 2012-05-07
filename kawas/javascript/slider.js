@@ -1,3 +1,5 @@
+var Slider = (function($){
+
 function Slider($obj,options){
 	this.slider = $obj;
 	this.wrapper = $obj.parent();
@@ -76,10 +78,11 @@ Slider.prototype = {
 		if($n===0){$page = 1;}
 		else if($n===100){$page = this.totalPages;}
 		else{$page = Math.round((($n * 100) * (this.totalPages - 1))/100) + 1;}
+		//console.log('passed:'+$n,'page:'+$page,'pages:'+this.totalPages);
 		return $page;
-		// console.log('passed:'+$n,'page:'+$page,'pages:'+this.totalPages);
 	}
 	, goto:function($n){
+		if($n == this.currentPage){return this;}
 		if(!this.hasPages){return this;}
 		var $pageShift = $n - this.currentPage
 			, that = this;
@@ -109,3 +112,7 @@ Slider.prototype = {
 	}
 
 }
+ 
+	return Slider;
+
+})(jQuery);

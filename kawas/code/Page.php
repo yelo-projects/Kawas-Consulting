@@ -4,9 +4,16 @@ class Page extends SiteTree {
 	static $allowed_children = array('Page','EventsPage','VacanciesPage');
 	public $isHeadPage = true;
 	public $isEmbedded = false;
+	static $db = array(
+		'SubTitle'	=>	'varchar'
+	);
 
 	function Summary($maxWords=30){
 		return $this->_summary($this->Content, $maxWords);
+	}
+
+	function getMembers(){
+		return DataObject::get('MemberPage','ParentID='.$this->ID);
 	}
 
 	function Random($type,$limit=2, $filter=NULL){
@@ -95,21 +102,28 @@ class Page extends SiteTree {
 	}
 
 	public function getIsEmbedded(){
-		return $this->isEmbedded;
+		if(Director::is_ajax() || isset($_GET['x']) || $this->isEmbedded){
+			return true;
+		}
+	}
+
+	public function IsAjaxed(){
+		return (Director::is_ajax() || isset($_GET['x']));
 	}
 
 	public function getRender($withChildren=true){
 		$this->isEmbedded = true;
 		$return = $this->renderWith(array($this->class,'Page'));
-		if($withChildren && $this->Children()){
-			$children = $this->Children();
-			foreach($children as $child){
-				$child->isHeadPage = false;
-				$return.=$child->getRender(false);
-			}
-		}
 		return $return;
 	}
+
+	function getCMSFields($params=null){
+		$fields = parent::getCMSFields($params);
+		$subTitle = new TextField('SubTitle','SubTitle');
+		$fields->addFieldToTab('Root.Content.Main',$subTitle, 'Content'); 
+		return $fields;
+	}
+
 }
 class Page_Controller extends ContentController {
 
@@ -133,7 +147,7 @@ class Page_Controller extends ContentController {
 
 	public function init() {
 		$jqueryVer = '1.7.2';
-		$root = 'kawas/javascript/';
+		$root = 'themes/kawas2/js/';
 		if(Director::isDev()){
 			Requirements::javascript($root.'jquery-'.$jqueryVer.'.js');
 		}else{
@@ -141,16 +155,16 @@ class Page_Controller extends ContentController {
 			Requirements::customScript("if(typeof jQuery === 'undefined'){document.write(unescape(\"%3Cscript src='".$root."jquery-".$jqueryVer.".min.js' type='text/javascript' %3E%3C/script%3E\"))}");
 		}
 		Requirements::combine_files('kawas.js',array(
-			  $root.'jquery.scrollTo-1.4.2-min.js'	
-			, $root.'jquery.localscroll-1.2.7-min.js'
-			, $root.'jquery.inview.js'
-			, $root.'jquery.easing.1.3.js'
+			  $root.'jquery.mousewheel.js'	
+			, $root.'jquery.mwheelIntent.js'
+			, $root.'jquery.jscrollpane.min.js'
+			, $root.'jquery.history.js'
 			, $root.'mailHider.js'
-			, $root.'slider.js'
-			//$root.'parallax.js',
-			, $root.'jquery.lettering-0.6.1.min.js'
-			, $root.'jquery.scrollorama.js'
-			, $root.'main.js'
+			, $root.'core.string.js'
+			, $root.'jquery.easing.1.3.js'
+			, $root.'jquery.smartresize.js'
+			, $root.'jquery.ba-hashchange.js'
+			, $root.'jquery.page.js'
     	));
 		parent::init();
 	}

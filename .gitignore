@@ -10,5 +10,7 @@ _resampled
 *.swo
 assets/Uploads
 assets/.sqlitedb
+themes/kawas/images
+themes/kawas/backgrounds
 log
 _temp*

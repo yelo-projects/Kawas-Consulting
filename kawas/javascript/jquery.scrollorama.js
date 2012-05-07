@@ -6,6 +6,9 @@
 */
 
 (function($) {
+
+	var defFunc = function(){};	
+
     $.scrollorama = function(options) {
 		
 		// PRIVATE VARS
@@ -66,7 +69,7 @@
 					onScrollorama();
 					didScroll = false;
 				}				
-			}, 100);
+			}, 50);
 		}
 		
 		function onScrollorama() {
@@ -74,6 +77,7 @@
 			var currBlockIndex = getCurrBlockIndex(scrollTop);
 			var animPercent = 0;
 			var anim;
+			var func;
 			var j = 0,i=0;
 			// update all animations
 			for (i=0; i<blocks.length; i++) {
@@ -82,12 +86,13 @@
 				if (blocks[i].animations.length) {
 					for (j=0; j<blocks[i].animations.length; j++) {
 						anim = blocks[i].animations[j];
-						
+						func = anim.func;	
 						// if above current block, settings should be at start value
 						if (i > currBlockIndex) {
 							if (currBlockIndex != i-1 && anim.baseline != 'bottom') {
 								setProperty(anim.element, anim.property, anim.startVal);
 								animPercent = 0;
+								func(anim.element,animPercent,anim,blocks[i].block);
 							}
 							if (blocks[i].pin) {
 								blocks[i].block
@@ -101,6 +106,7 @@
 						else if (i < currBlockIndex) {
 							setProperty(anim.element, anim.property, anim.endVal);
 							animPercent = 1;
+							func(anim.element,animPercent,anim,blocks[i].block);
 							if (blocks[i].pin) {
 								blocks[i].block
 									.css('position', 'absolute')
@@ -126,12 +132,14 @@
 							if (scrollTop < startAnimPos){
 								setProperty(anim.element, anim.property, anim.startVal);
 								animPercent = 0;
+								func(anim.element,animPercent,anim,blocks[i].block);
 							}
 							
 							// if scroll is after end of animation, set to end value
 							else if (scrollTop > endAnimPos) {
 								setProperty(anim.element, anim.property, anim.endVal);
 								animPercent = 1;
+								func(anim.element,animPercent,anim,blocks[i].block);
 								if (blocks[i].pin) {
 									blocks[i].block
 											.css('position', 'absolute')
@@ -150,11 +158,9 @@
 								// then multiply the percent by the value range and calculate the new value
 								var animVal = anim.startVal + (animPercent * (anim.endVal - anim.startVal));
 								setProperty(anim.element, anim.property, animVal);
+								func(anim.element,animPercent,anim,blocks[i].block);
 							}
-						}
-						if(anim.func){
-							anim.func(anim.element,animPercent,anim,blocks[i].block);
-						}
+						}	
 					}
 				}
 			}
@@ -175,8 +181,49 @@
 			return currBlockIndex;
 		}
 		
+		function setMultipleBackgrounds(target,prop,val){
+			var axis	= prop[0]
+				, _s 	= []
+				, vals	= prop[1]
+				, _l	= vals.length
+				, i		= 0
+				, currentBackgrounds = getCurrentBackgroundProperty(target,true)
+				, currentPos
+				, v;
+			for(i;i<_l;i++){
+				currentPosition = currentBackgrounds[i] ? currentBackgrounds[i] : ['0','0'];
+				v = vals[i] * val
+				_s.push(makeBackgroundProperty(v,axis,currentPosition));
+			}
+			_s = _s.join(',');
+			target.css('background-position',_s);
+		}
+
+		function getCurrentBackgroundProperty(target,multiple){
+			var bg = target.css('background-position');
+			if(!bg){return multiple?[['0','0'],['0','0']]:['0','0'];}
+			if(!multiple) return bg.split(' ') ||  ['0','0'];
+		 	var currentBackgrounds = bg.split(',')
+				, _l = currentBackgrounds.length
+				, i = 0;
+			for(i;i<_l;i++){
+				currentBackgrounds[i] = currentBackgrounds[i].split(' ') || ['0','0'];
+			}
+			return currentBackgrounds;
+		}
+
+		function makeBackgroundProperty(val,axis,currentPosition){
+			if(axis === 'x'){return val+'px '+ (currentPosition[1] || '0');}
+			if(axis === 'y'){return (currentPosition[0] || '0') +' '+val+'px';}
+			if(!axis || axis === 'xy'){return val+'px'+' '+val+'px';}
+		}
+
 		function setProperty(target, prop, val) {
-			if (prop === 'rotate' || prop === 'zoom' || prop === 'scale') {
+			var currentPosition;
+			if($.isArray(prop) && prop.length>1 && prop[1].length > 0){
+				setMultipleBackgrounds(target,prop,val)
+			}
+			else if (prop === 'rotate' || prop === 'zoom' || prop === 'scale') {
 				if (prop === 'rotate') {
 					target.css(browserPrefix+'transform', 'rotate('+val+'deg)');
 				} else if (prop === 'zoom' || prop === 'scale') {
@@ -189,12 +236,15 @@
 				}
 			}
 			else if(prop === 'background-position-x' || prop === 'background-position-y' ){
-				var currentPosition = target.css('background-position').split(' ');
+				currentPosition = getCurrentBackgroundProperty(target,false);
 				if(prop === 'background-position-x'){
-					target.css('background-position',val+'px '+currentPosition[1])
+					target.css('background-position',makeBackgroundProperty(val,'x',currentPosition));
 				}
-				if(prop === 'background-position-y'){
-					target.css('background-position',currentPosition[0]+' '+val+'px')
+				else if(prop === 'background-position-y'){
+					target.css('background-position',makeBackgroundProperty(val,'y',currentPosition));
+				}
+				else{
+					target.css('background-position',makeBackgroundProperty(val,'xy',currentPosition));
 				}
 			} 
 			else if(prop === 'text-shadow' ){
@@ -230,7 +280,7 @@
 			var targetIndex;
 			var targetBlock;
 			for (var i=0; i<blocks.length; i++) {
-				if (blocks[i].block.has(target).length) {
+				if (blocks[i].block.is(target) || blocks[i].block.has(target).length) {
 					targetBlock = blocks[i];
 					targetIndex = i;
 				}
@@ -252,7 +302,10 @@
 				}
 				
 				// set anim.start/anim.end defaults for rotate, zoom/scale, letter-spacing
-				if (anim.property == 'rotate') {
+				if($.isArray(anim.property)){
+					if (anim.start === undefined) anim.start = getCurrentBackgroundProperty(target,true);
+				}
+				else if (anim.property == 'rotate') {
 					if (anim.start === undefined)	anim.start = 0;
 					if (anim.end === undefined)		anim.end = 0;
 				} else if (anim.property == 'zoom' || anim.property == 'scale' ) {
@@ -261,6 +314,8 @@
 				} else if (anim.property == 'letter-spacing' && target.css(anim.property)) {
 					if (anim.start === undefined)	anim.start = 1;
 					if (anim.end === undefined)		anim.end = 1;
+				} else if (anim.property == 'background-position-y'){
+					if (anim.start === undefined) anim.start = getCurrentBackgroundProperty(target,false)[1];
 				}
 				
 				if (anim.baseline === undefined) {
@@ -279,9 +334,8 @@
 					endVal: anim.end !== undefined ? anim.end : parseInt(target.css(anim.property),10),			// if undefined, use current css value
 					baseline: anim.baseline !== undefined ? anim.baseline : 'bottom',
 					easing: anim.easing,
-					func:	anim.func || false
+					func:	anim.func || defFunc
 				});
-				
 				if (anim.pin) {
 					if (targetBlock.pin < anim.duration + anim.delay) {
 						var offset = anim.duration + anim.delay - targetBlock.pin;
