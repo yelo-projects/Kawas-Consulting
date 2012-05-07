@@ -9,7 +9,6 @@
 $MetaTags(false)
 <title><% if MetaTitle %>$MetaTitle<% else %>$Title<% end_if %> &raquo; $SiteConfig.Title</title>
 <link rel="shortcut icon" href="/favicon.ico" />
-<% require themedCSS(jquery.jscrollpane.custom) %>
 <% require themedCSS(style) %>	 
 <noscript><style>@media screen and (max-width: 715px) {.content-scroller{overflow: visible;}}</style></noscript>
 </head>

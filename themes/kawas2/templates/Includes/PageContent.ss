@@ -1,8 +1,8 @@
-<article class="content<% if IsEmbedded %> embedded<% end_if %> $ClassNice" id="$UniqueId" rel="$UniqueId" title="$Title">
+<article class="content<% if IsEmbedded %> embedded<% else %> content-active<% end_if %> $ClassNice" id="$UniqueId" rel="$UniqueId" title="$Title">
 	<div class="inner">
 		<h2>$Title</h2>	
 		<h3>$SubTitle</h3>
-		<% if class=BlogEntry %><div class="date">$Date.Long | $Comments.Count <% _t('COMMENTS', 'Comments') %></div><% end_if %>
+		<% if TagsCollection %><div class="date">$Date.Long<% end_if %>
 		<div class="submenu">
 		<% if blogEntries %>
 		<% else %>
@@ -36,8 +36,7 @@
 		<% end_control %>
 		</div>
 		<% end_if %>
-		<div class="comments">
-		</div>
+		<% if TagsCollection %><% include Comments %><% end_if %>
 	</div>
 	<div class="pagination">
 		<% include BlogPagination %>

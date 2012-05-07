@@ -124,6 +124,10 @@ class Page extends SiteTree {
 		return $fields;
 	}
 
+	public function getIsDev(){
+		return Director::isDev();
+	}
+
 }
 class Page_Controller extends ContentController {
 

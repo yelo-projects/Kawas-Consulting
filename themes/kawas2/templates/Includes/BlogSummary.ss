@@ -9,5 +9,5 @@
 		</div>
 	<% end_if %>
 	<p>$Content.FirstParagraph(html)</p>
-	<div class="date">$Date.Long | $Comments.Count <% _t('COMMENTS', 'Comments') %></a></div>
+	<div class="date">$Date.Long</div>
 </div>

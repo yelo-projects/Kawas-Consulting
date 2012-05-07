@@ -9,7 +9,6 @@ _resampled
 *.swp
 *.swo
 assets/Uploads
-assets/.sqlitedb
 themes/kawas/images
 themes/kawas/backgrounds
 log
