@@ -82,11 +82,16 @@ class LinkExternal extends DataObject{
 	}
 
 	public function Link(){
-		return '<a href="'.$this->URL.'" class="'.$this->HTMLClasses().'" target="_blank">'.$this->Text.'</a>';
+		return '<a href="'.$this->URL.'" class="'.$this->HTMLClasses().'" target="_blank" title="'.$this->Text.'">'.$this->Text.'</a>';
 	}
 
 	public function LinkURL(){
-		return '<a href="'.$this->URL.'" class="'.$this->HTMLClasses().'" target="_blank">'.str_replace(array('http://','https://'),'',$this->URL).'</a>';
+		return '<a href="'.$this->URL.'" class="'.$this->HTMLClasses().'" target="_blank" title="'.$this->Text.'">'.str_replace(array('http://','https://'),'',$this->URL).'</a>';
 	}
 
+	public function canEdit(){return true;}
+	public function canCreate(){return true;}
+	public function canDelete(){return true;}
+	public function canPublish(){return true;}
+	
 }
