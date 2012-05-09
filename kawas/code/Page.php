@@ -155,7 +155,7 @@ class Page_Controller extends ContentController {
 			  $root.'jquery.mousewheel.js'	
 			, $root.'jquery.mwheelIntent.js'
 			, $root.'jquery.jscrollpane.min.js'
-			, $root.'jquery.history.js'
+			//, $root.'jquery.history.js'
 			, $root.'mailHider.js'
 			, $root.'core.string.js'
 			, $root.'jquery.easing.1.3.js'
