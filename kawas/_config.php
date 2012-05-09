@@ -15,7 +15,8 @@ $_project_log = dirname($_project_dir).'/log/'.$project.'-'.date('H-i-s').'.log'
 $_project_url = 'http://'.(SERVER_PROD ? $project.'.com' : 'localhost');
 
 global $databaseConfig;
-$databaseConfig = SERVER_PROD ? include 'db_prod.php':include 'db_dev.php';
+//$databaseConfig = SERVER_PROD ? include 'db_prod.php':include 'db_dev.php';
+$databaseConfig = include 'db_dev.php';
 
 MySQLDatabase::set_connection_charset('utf8');
 SSViewer::set_theme($theme_name);
