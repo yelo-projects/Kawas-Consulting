@@ -9,7 +9,11 @@
 $MetaTags(false)
 <title><% if MetaTitle %>$MetaTitle<% else %>$Title<% end_if %> &raquo; $SiteConfig.Title</title>
 <link rel="shortcut icon" href="/favicon.ico" />
-<% require themedCSS(style) %>	 
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<% require themedCSS(style) %>
+$JQueryFallback
 <noscript><style>@media screen and (max-width: 715px) {.content-scroller{overflow: visible;}}</style></noscript>
 </head>
 <body id="Page-$UniqueId" class="$UniqueId $class">

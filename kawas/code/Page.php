@@ -150,14 +150,7 @@ class Page_Controller extends ContentController {
 	);
 
 	public function init() {
-		$jqueryVer = '1.7.2';
 		$root = 'themes/kawas2/js/';
-		if(Director::isDev()){
-			Requirements::javascript($root.'jquery-'.$jqueryVer.'.js');
-		}else{
-			Requirements::javascript('http://ajax.googleapis.com/ajax/libs/jquery/'+$jqueryVer+'/jquery.min.js');
-			Requirements::customScript("if(typeof jQuery === 'undefined'){document.write(unescape(\"%3Cscript src='".$root."jquery-".$jqueryVer.".min.js' type='text/javascript' %3E%3C/script%3E\"))}");
-		}
 		Requirements::combine_files('kawas.js',array(
 			  $root.'jquery.mousewheel.js'	
 			, $root.'jquery.mwheelIntent.js'
@@ -171,6 +164,12 @@ class Page_Controller extends ContentController {
 			, $root.'jquery.page.js'
     	));
 		parent::init();
+	}
+
+	function getJQueryFallback(){
+		$root = 'themes/kawas2/js/';
+		$jqueryVer = '1.7.2';
+		return "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/$jqueryVer/jquery.min.js\"></script><script type=\"text/javascript\">if(typeof jQuery === 'undefined'){document.write(unescape(\"%3Cscript src='{$root}jquery-{$jqueryVer}.min.js' type='text/javascript' %3E%3C/script%3E\"))}</script>";
 	}
 
 	function themedCSS($name){
