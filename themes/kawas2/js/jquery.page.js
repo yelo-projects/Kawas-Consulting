@@ -1,6 +1,6 @@
-jQuery(function($){
+jQuery(window).load(function(){
 	var loc = location.pathname;	
-
+	var $ = jQuery;
 (function(window, undefined) {
 	
 	var Page	= (function() {
