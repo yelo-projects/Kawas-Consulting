@@ -1,0 +1,2 @@
+#!/bin/bash
+git pull && rm -r silverstripe-cache && mkdir silverstripe-cache && chmod -R 777 silverstripe-cache && rm assets/_combinedFiles/kawas.js
