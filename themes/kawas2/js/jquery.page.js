@@ -33,7 +33,7 @@ jQuery(window).load(function(){
 				// initialize the jScrollPane on both the menu and articles
 				_initCustomScroll();
 
-				if(!$('body').hasClass('home')){return;}
+				//if(!$('body').hasClass('home')){return;}
 				// initialize some events
 				_initEvents();
 				// sets some css properties 
@@ -73,7 +73,7 @@ jQuery(window).load(function(){
 				var chapter 	= chapter || window.location.hash,
 					isHome		= (chapter === undefined),
 					// we will jump to the introduction chapter if theres no chapter
-					$article 	= $( chapter ? chapter : '#home');
+					$article 	= $( chapter ? chapter : $articles.length? '#'+$articles[0].id : '#about');
 				if( $article.length ) {
 					if(!title){title = $article.attr('title');}
 						// left / top of the element
